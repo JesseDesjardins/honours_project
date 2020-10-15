@@ -1,2 +1,5 @@
 # VS Code settings
 .vscode
+
+# Tmp directory for model testing
+tmp
