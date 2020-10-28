@@ -8,3 +8,4 @@ __pycache__
 tmp
 training_results
 logs
+example_scipts/logs

@@ -43,9 +43,9 @@ class ProgressBarManager(object):
 
 #TODO Eventally get action and image per state WHILE training
 # Custom Calback
-class CustomCallback(BaseCallback):
+class SaveActionImagePerStateCallback(BaseCallback):
     def __init__(self, info_dump_dir: str, verbose=1):
-        super(CustomCallback, self).__init__(verbose)
+        super(SaveActionImagePerStateCallback, self).__init__(verbose)
         self.info_dump_dir = info_dump_dir
 
     def _init_callback(self) -> None:
@@ -72,13 +72,8 @@ env = gym.make(env_id)
 print(env.action_space)
 env = Monitor(env, log_dir)
 
-# Add some action noise for exploration
-# n_actions = env.action_space.shape[-1]
-# action_noise = NormalActionNoise(mean=np.zeros(n_actions), sigma=0.1 * np.ones(n_actions))
-
 # Create the model
 model = PPO('MlpPolicy', env)
-# model = TD3('MlpPolicy', env, action_noise=action_noise, verbose=0)
 
 # Create the callback
 auto_save_callback = EvalCallback(env, None, 5, 1000, log_dir, best_model_save_dir, True, False, 1)
@@ -108,8 +103,6 @@ obs = env.reset()
 #   return self.get_screens()[0]
 # IndexError: list index out of range
 img = env.render(mode='rgb_array')
-
-
 
 for i in range(1000):
     images.append(img)
