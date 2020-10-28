@@ -1,7 +1,7 @@
 import gym
 from stable_baselines3.common.vec_env import VecVideoRecorder, DummyVecEnv
 
-env_id = 'CartPole-v1'
+env_id = 'LunarLanderContinuous-v2'
 video_folder = 'logs/videos/'
 video_length = 100
 

@@ -1,5 +1,10 @@
+# Compiled files
+__pycache__
+
 # VS Code settings
 .vscode
 
-# Tmp directory for model testing
+# Temporary directories for model testing
 tmp
+training_results
+logs

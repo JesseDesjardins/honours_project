@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+gym = "*"
+imageio = "*"
+matplotlib = "*"
+stable-baselines3 = {extras = ["extra"], version = "*"}
+tqdm = "*"
+
+[requires]
+python_version = "3.8"
