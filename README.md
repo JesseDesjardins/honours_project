@@ -22,7 +22,9 @@ This is to avoid an issue with some of the Gym environments.
 
 
 # Running the Poject
-Run all files from inside the Pipenv shell.
+Run all files from inside the Pipenv shell:
+
+    pipenv shell
 
 
 ## Note for me

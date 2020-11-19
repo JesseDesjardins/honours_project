@@ -62,9 +62,11 @@ curr_timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")
 log_dir = 'training_results/{}/logs/'.format(curr_timestamp)
 best_model_save_dir = 'training_results/{}/best_model/'.format(curr_timestamp)
 gif_dir = 'training_results/{}/'.format(curr_timestamp)
+trace_log_dir = 'training_results/{}/trace_log/'.format(curr_timestamp)
 os.makedirs(log_dir, exist_ok=True)
 os.makedirs(best_model_save_dir, exist_ok=True)
 os.makedirs(gif_dir, exist_ok=True)
+os.makedir(trace_log_dir, exist_ok=True)
 
 # Create and wrap environment
 env_id = 'LunarLander-v2'
@@ -73,13 +75,16 @@ print(env.action_space)
 env = Monitor(env, log_dir)
 
 # Create the model
-model = PPO('MlpPolicy', env)
+policy_id = 'MlpPolicy'
+model = PPO(policy_id, env)
 
 # Create the callback
 auto_save_callback = EvalCallback(env, None, 5, 1000, log_dir, best_model_save_dir, True, False, 1)
 
 # Train the agent
-timesteps = 5000
+timesteps = 1000000
+
+print('Training {} environment with PPO algorithm using {} policy over {} timesteps'.format(env_id, policy_id, timesteps))
 
 with ProgressBarManager(timesteps) as progress_callback:
     model.learn(total_timesteps=int(timesteps), callback=[progress_callback, auto_save_callback])
@@ -95,7 +100,7 @@ actions = []
 # env.close()
 # obs = env.reset()
 # Current work around: create fresh env
-env = gym.make('LunarLander-v2')
+env = gym.make(env_id)
 obs = env.reset()
 
 # This line sometimes throws an error stemming from pyglet, unsure why:
@@ -111,6 +116,8 @@ for i in range(1000):
     obs, rewards, dones, info = env.step(action)
     img = env.render(mode='rgb_array')
 
-imageio.mimsave(gif_dir + 'lander_ppo.gif', [np.array(img) for i, img in enumerate(images) if i%2 == 0], fps=29)
+imageio.mimsave(gif_dir + 'lander_ppo_' + str(timesteps) + '.gif', [np.array(img) for i, img in enumerate(images) if i%2 == 0], fps=29)
+
+
 print(actions)
 print(images[0])
