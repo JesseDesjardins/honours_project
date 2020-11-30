@@ -11,7 +11,6 @@ imageio = "*"
 matplotlib = "*"
 stable-baselines3 = {extras = ["extra"], version = "*"}
 tqdm = "*"
-networkx = "*"
 
 [requires]
 python_version = "3.8"
