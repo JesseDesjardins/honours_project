@@ -1,3 +1,5 @@
+import json
+
 def ktail(states, edges, k=2):
     """ Simple ktail implementation
 
@@ -56,7 +58,6 @@ def ktail(states, edges, k=2):
     for key in ktails.keys():
         for ktail in ktails[key]:
             all_edges_ktails.append((key, ktail))
-    print(all_edges_ktails)
 
     # Create a candidate list of all pairs that can be merged
     candidate_lst = []
@@ -108,7 +109,7 @@ def ktail(states, edges, k=2):
         # Refine candidate list by removing any candidates that include the now merged state
         refined_candidate_lst = []
         for candidate in candidate_lst:
-            if not(merged_state in candidate[0][0] or merged_state in candidate[1][0]): refined_candidate_lst.append(candidate)
+            if not(merged_state == candidate[0][0] or merged_state == candidate[1][0]): refined_candidate_lst.append(candidate)
         candidate_lst = refined_candidate_lst
     # Return the now-updated states and edges dicts
     return states, edges, merged_pairs
@@ -133,32 +134,34 @@ def dfs(graph, start, length, paths, path=[]):
             dfs(graph, child, length, paths, path)   
 
 if __name__ == "__main__":
-    g_s = {'_root' : ['a', 'f'],
-        'a' : ['b'],
-        'b' : ['c'],
-        'c' : ['d'],
-        'd' : ['e'],
-        'e' : [],
-        'f' : ['g'],
-        'g' : ['h'],
-        'h' : ['i'],
-        'i' : ['j'],
-        'j' : ['k'],
-        'k' : ['l'],
-        'l' : []
+    """ Defunt test mode, only works with int states """
+
+    g_s = {-1 : [0, 5],
+        0 : [1],
+        1 : [2],
+        2 : [3],
+        3 : [4],
+        4 : [],
+        5 : [6],
+        6 : [7],
+        7 : [8],
+        8 : [9],
+        9 : [10],
+        10 : [11],
+        11 : []
     }
-    g_e = {('_root', 'a'): -1, 
-        ('_root', 'f'): -1, 
-        ('a', 'b'): 3, 
-        ('b', 'c'): 3, 
-        ('c', 'd'): 2, 
-        ('d', 'e'): 2, 
-        ('f', 'g'): 3, 
-        ('g', 'h'): 3, 
-        ('h', 'i'): 0,
-        ('i', 'j'): 1,
-        ('j', 'k'): 3,
-        ('k', 'l'): 3,
+    g_e = {(-1, 0): -1, 
+        (-1, 5): -1, 
+        (0, 1): 3, 
+        (1, 2): 3, 
+        (2, 3): 2, 
+        (3, 4): 2, 
+        (5, 6): 3, 
+        (6, 7): 3, 
+        (7, 8): 0,
+        (8, 9): 1,
+        (9, 10): 3,
+        (10, 11): 3,
     }
 
     print('===============')
@@ -180,3 +183,7 @@ if __name__ == "__main__":
     print(fsm_edges)
     print('Merged pairs of states:')
     print(merged_pairs)
+
+    with open('dummy_test.txt', 'w') as outfile:
+        # outfile.write(json.dumps([{'key':k, 'value': v} for k, v in fsm_edges.iteritems()]))
+        outfile.write(str(fsm_edges))
