@@ -7,5 +7,6 @@ __pycache__
 # Temporary directories for model testing
 tmp
 training_results
+ktail_results
 logs
 example_scipts/logs

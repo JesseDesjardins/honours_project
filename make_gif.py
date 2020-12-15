@@ -10,10 +10,11 @@ from stable_baselines3 import PPO
 env_id = 'LunarLander-v2'
 
 # load the best agent model
-curr_timestamp = '28-10-2020-16h50'
+curr_timestamp = datetime.now().strftime("%Y-%m-%d-%Hh%M")
+agent_folder = '2020-12-14-19h20'
 
-gif_dir = 'training_results/{}/'.format(curr_timestamp)
-best_model_save_dir = 'training_results/{}/best_model/'.format(curr_timestamp)
+gif_dir = 'training_results/{}/'.format(agent_folder)
+best_model_save_dir = 'training_results/{}/best_model/'.format(agent_folder)
 best_model = PPO.load(best_model_save_dir + 'best_model')
  
 # Enjoy tained agent and save a GIF
@@ -40,4 +41,4 @@ for i in range(1000):
     obs, rewards, dones, info = env.step(action)
     img = env.render(mode='rgb_array')
 
-imageio.mimsave(gif_dir + 'lander_ppo.gif', [np.array(img) for i, img in enumerate(images) if i%2 == 0], fps=29)
+imageio.mimsave(gif_dir + 'lander_ppo_' + curr_timestamp + '.gif', [np.array(img) for i, img in enumerate(images) if i%2 == 0], fps=29)

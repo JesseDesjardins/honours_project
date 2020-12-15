@@ -14,7 +14,7 @@ def ktail(states, edges, k=2):
              is an ordered pair of states representing the outgoing 
              and incoming states connected to the edge, respectively,
              and the value is the value of the edge
-    k      : desired length of teh ktail (default 2)
+    k      : desired length of the ktail (default 2)
 
     Returns two dicts, states and edges, and a list, merged_pairs, 
     representing the new FSM and the successfully merged pairs of 
@@ -114,7 +114,6 @@ def ktail(states, edges, k=2):
     # Return the now-updated states and edges dicts
     return states, edges, merged_pairs
 
-
 def dfs(graph, start, length, paths, path=[]): 
     """ Simple recursive Depth First Search
 
@@ -134,8 +133,6 @@ def dfs(graph, start, length, paths, path=[]):
             dfs(graph, child, length, paths, path)   
 
 if __name__ == "__main__":
-    """ Defunt test mode, only works with int states """
-
     g_s = {-1 : [0, 5],
         0 : [1],
         1 : [2],
