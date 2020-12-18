@@ -11,7 +11,7 @@ env_id = 'LunarLander-v2'
 
 # load the best agent model
 curr_timestamp = datetime.now().strftime("%Y-%m-%d-%Hh%M")
-agent_folder = '2020-12-14-19h20'
+agent_folder = '2020-12-14-22h15'
 
 gif_dir = 'training_results/{}/'.format(agent_folder)
 best_model_save_dir = 'training_results/{}/best_model/'.format(agent_folder)

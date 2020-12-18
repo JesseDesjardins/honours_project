@@ -61,20 +61,21 @@ class SaveActionImagePerStateCallback(BaseCallback):
         return True
 
 def train_save_load_render_gif(num_timesteps=10000, eval_episodes=5, eval_frequency=1000):
-    ''' Large method that will create a LunarLandar-v2 RL environment,
+    ''' Large method that will create a LunarLander-v2 RL environment,
     train and save an agent using user-specified paramenters, reload 
     the trained agent and generate a GIF of the agent in action.
 
     num_timesteps (int)  : number of timesteps to train over 
     (Default 10,000)
+
     eval_episodes (int)  : number of episodes to test the agent 
     against during the training process (Default 5)
+
     eval_frequency (int) : evaluate the agent during training each 
     eval_frequency many timesteps (Default 1000)
     '''
 
     # Create session dirs
-    #TODO change date format to year-month-day-hour-minute
     curr_timestamp = datetime.now().strftime("%Y-%m-%d-%Hh%M")
     log_dir = 'training_results/{}/logs/'.format(curr_timestamp)
     best_model_save_dir = 'training_results/{}/best_model/'.format(curr_timestamp)
@@ -91,7 +92,7 @@ def train_save_load_render_gif(num_timesteps=10000, eval_episodes=5, eval_freque
 
     # Create the model
     policy_id = 'MlpPolicy'
-    model = PPO(policy_id, env)
+    model = PPO(policy=policy_id, env=env)
 
     # Create the callback
     auto_save_callback = EvalCallback(

@@ -109,6 +109,7 @@ def ktail(states, edges, k=2):
         # Refine candidate list by removing any candidates that include the now merged state
         refined_candidate_lst = []
         for candidate in candidate_lst:
+            #TODO this can be waaaaay optimized, probably just a removal instead of re-writting a new list
             if not(merged_state == candidate[0][0] or merged_state == candidate[1][0]): refined_candidate_lst.append(candidate)
         candidate_lst = refined_candidate_lst
     # Return the now-updated states and edges dicts
@@ -120,9 +121,13 @@ def dfs(graph, start, length, paths, path=[]):
     Returns all paths of length "length" originating from first value of "start"
 
     graph     : full graph
+    
     start     : current state to find path from
+    
     length    : length of paths
+    
     paths     : list of all paths found
+    
     path      : current path (default [])
     """
     path = path + [start] 

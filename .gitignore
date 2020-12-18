@@ -5,8 +5,6 @@ __pycache__
 .vscode
 
 # Temporary directories for model testing
-tmp
 training_results
 ktail_results
-logs
-example_scipts/logs
+state_tries
